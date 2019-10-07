@@ -1,0 +1,91 @@
+﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="CalculatorConvertor.ScientificCalculator"
+             Title="Scientific Calculator"
+             BackgroundColor="#3A3A3D">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="btnCalc" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="Black"/>
+                <Setter Property="TextColor" Value="#1C66BD"/>
+                <Setter Property="BorderWidth" Value="0"/>
+                <Setter Property="FontSize" Value="40"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+
+        <StackLayout Orientation="Vertical"
+                 Padding="10">
+            <!-- Place new controls here -->
+
+
+            <Label  x:Name="lblRez"
+                        HorizontalTextAlignment="End"
+                        VerticalTextAlignment="Center"
+                        FontSize="Large"
+                        TextColor="#1C66BD"
+                        Text="0"></Label>
+
+
+            <Grid x:Name="CalcGrid" RowSpacing="1" ColumnSpacing="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button Text="x^2" Grid.Row="0" Grid.Column="0" Style="{StaticResource btnCalc}" Clicked="OnSelectedOperator"/>
+                <Button Text="x^y" Grid.Row="0" Grid.Column="1" Style="{StaticResource btnCalc}" Clicked="OnSelectedOperator"/>
+                <Button Text="sin" Grid.Row="0" Grid.Column="2" Style="{StaticResource btnCalc}" Clicked="OnSelectedOperator"/>
+                <Button Text="cos" Grid.Row="0" Grid.Column="3" Style="{StaticResource btnCalc}" Clicked="OnSelectedOperator"/>
+                <Button Text="tan" Grid.Row="0" Grid.Column="4" Style="{StaticResource btnCalc}" Clicked="OnSelectedOperator"/>
+
+                <Button Text="√x" Grid.Row="1" Grid.Column="0" Style="{StaticResource btnCalc}" Clicked="OnSelectedOperator"/>
+                <Button Text="C" Grid.Row="1" Grid.Column="1" Style="{StaticResource btnCalc}" Clicked="OnClear"/>
+                <Button Text="log" Grid.Row="1" Grid.Column="2" Style="{StaticResource btnCalc}" Clicked="OnSelectedOperator"/>
+                <Button Text="del" Grid.Row="1" Grid.Column="3" Style="{StaticResource btnCalc}" Clicked="OnSelectedOperator"/>
+                <Button Text="/" Grid.Row="1" Grid.Column="4" Style="{StaticResource btnCalc}" Clicked="OnSelectedOperator"/>
+
+                <Button Text="exp" Grid.Row="2" Grid.Column="0" Style="{StaticResource btnCalc}" Clicked="OnSelectedOperator"/>
+                <Button Text="7" Grid.Row="2" Grid.Column="1" Style="{StaticResource btnCalc}" Clicked="OnSelectedNumber"/>
+                <Button Text="8" Grid.Row="2" Grid.Column="2" Style="{StaticResource btnCalc}" Clicked="OnSelectedNumber"/>
+                <Button Text="9" Grid.Row="2" Grid.Column="3" Style="{StaticResource btnCalc}" Clicked="OnSelectedNumber"/>
+                <Button Text="*" Grid.Row="2" Grid.Column="4" Style="{StaticResource btnCalc}" Clicked="OnSelectedOperator"/>
+
+                <Button Text="n!" Grid.Row="3" Grid.Column="0" Style="{StaticResource btnCalc}" Clicked="OnSelectedOperator"/>
+                <Button Text="4" Grid.Row="3" Grid.Column="1" Style="{StaticResource btnCalc}" Clicked="OnSelectedNumber"/>
+                <Button Text="5" Grid.Row="3" Grid.Column="2" Style="{StaticResource btnCalc}" Clicked="OnSelectedNumber"/>
+                <Button Text="6" Grid.Row="3" Grid.Column="3" Style="{StaticResource btnCalc}" Clicked="OnSelectedNumber"/>
+                <Button Text="+" Grid.Row="3" Grid.Column="4" Style="{StaticResource btnCalc}" Clicked="OnSelectedOperator"/>
+
+                <Button Text="+/-" Grid.Row="4" Grid.Column="0" Style="{StaticResource btnCalc}" Clicked="OnSelectedOperator"/>
+                <Button Text="1" Grid.Row="4" Grid.Column="1" Style="{StaticResource btnCalc}" Clicked="OnSelectedNumber"/>
+                <Button Text="2" Grid.Row="4" Grid.Column="2" Style="{StaticResource btnCalc}" Clicked="OnSelectedNumber"/>
+                <Button Text="3" Grid.Row="4" Grid.Column="3" Style="{StaticResource btnCalc}" Clicked="OnSelectedNumber"/>
+                <Button Text="-" Grid.Row="4" Grid.Column="4" Style="{StaticResource btnCalc}" Clicked="OnSelectedOperator"/>
+
+                <Button Text="(" Grid.Row="5" Grid.Column="0" Style="{StaticResource btnCalc}" Clicked="OnDot"/>
+                <Button Text=")" Grid.Row="5" Grid.Column="1" Style="{StaticResource btnCalc}" Clicked="OnDot"/>
+                <Button Text="0" Grid.Row="5" Grid.Column="2" Style="{StaticResource btnCalc}" Clicked="OnSelectedNumber"/>
+                <Button Text="." Grid.Row="5" Grid.Column="3" Style="{StaticResource btnCalc}" Clicked="OnDot"/>
+                <Button Text="=" Grid.Row="5" Grid.Column="4" Style="{StaticResource btnCalc}" Clicked="OnCalculate"/>
+
+
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+
+</ContentPage>

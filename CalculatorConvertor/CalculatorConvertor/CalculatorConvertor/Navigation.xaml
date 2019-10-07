@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="CalculatorConvertor.Navigation"
+             BackgroundColor="#3A3A3D">
+                
+    <ContentPage.Content>
+        <StackLayout>
+            <Label x:Name="lblWelcome"
+                    Text="Welcome to the app"
+                   FontSize="Large"
+                   TextColor="#1C66BD"/>
+            <Button x:Name="btnBasicCalculator"
+                    Text="Basic Calculator"
+                    Clicked="GoToMainPage_Clicked"
+                    BorderWidth="20"
+                    BackgroundColor="Black"
+                    TextColor="#1C66BD">
+            </Button>
+            <Button x:Name="btnScientificCalculator"
+                    Text="Scientific Calculator"
+                    Clicked="GoToScientificCalculator_Clicked"
+                    BorderWidth="20"
+                    BackgroundColor="Black"
+                    TextColor="#1C66BD">
+            </Button>
+            <Button x:Name="btnConvertor"
+                    Text="Convertor"
+                    Clicked="GoToConvertor_Clicked"
+                    BorderWidth="20"
+                    BackgroundColor="Black"
+                    TextColor="#1C66BD">
+            </Button>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
