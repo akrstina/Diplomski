@@ -13,7 +13,7 @@
                 <Setter Property="BackgroundColor" Value="Black"/>
                 <Setter Property="TextColor" Value="#1C66BD"/>
                 <Setter Property="BorderWidth" Value="0"/>
-                <Setter Property="FontSize" Value="40"/>
+                <Setter Property="FontSize" Value="35"/>
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -45,26 +45,26 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Button Text="C" Grid.Row="0" Grid.Column="0" Style="{StaticResource btnCalc}" Clicked="OnClear"/>
-                <Button Text="/" Grid.Row="0" Grid.Column="1" Style="{StaticResource btnCalc}" Clicked="OnSelectedOperator"/>
-                <Button Text="*" Grid.Row="0" Grid.Column="2" Style="{StaticResource btnCalc}" Clicked="OnSelectedOperator"/>
-                <Button Text="-" Grid.Row="0" Grid.Column="3" Style="{StaticResource btnCalc}" Clicked="OnSelectedOperator"/>
+                <Button Text="/" Grid.Row="0" Grid.Column="1" Style="{StaticResource btnCalc}" Clicked="OnElementClick"/>
+                <Button Text="*" Grid.Row="0" Grid.Column="2" Style="{StaticResource btnCalc}" Clicked="OnElementClick"/>
+                <Button Text="-" Grid.Row="0" Grid.Column="3" Style="{StaticResource btnCalc}" Clicked="OnElementClick"/>
 
-                <Button Text="7" Grid.Row="1" Grid.Column="0" Style="{StaticResource btnCalc}" Clicked="OnSelectedNumber"/>
-                <Button Text="8" Grid.Row="1" Grid.Column="1" Style="{StaticResource btnCalc}" Clicked="OnSelectedNumber"/>
-                <Button Text="9" Grid.Row="1" Grid.Column="2" Style="{StaticResource btnCalc}" Clicked="OnSelectedNumber"/>
-                <Button Text="+" Grid.Row="1" Grid.Column="3" Grid.RowSpan="2" Style="{StaticResource btnCalc}" Clicked="OnSelectedOperator"/>
+                <Button Text="7" Grid.Row="1" Grid.Column="0" Style="{StaticResource btnCalc}" Clicked="OnElementClick"/>
+                <Button Text="8" Grid.Row="1" Grid.Column="1" Style="{StaticResource btnCalc}" Clicked="OnElementClick"/>
+                <Button Text="9" Grid.Row="1" Grid.Column="2" Style="{StaticResource btnCalc}" Clicked="OnElementClick"/>
+                <Button Text="+" Grid.Row="1" Grid.Column="3" Grid.RowSpan="2" Style="{StaticResource btnCalc}" Clicked="OnElementClick"/>
 
-                <Button Text="4" Grid.Row="2" Grid.Column="0" Style="{StaticResource btnCalc}" Clicked="OnSelectedNumber"/>
-                <Button Text="5" Grid.Row="2" Grid.Column="1" Style="{StaticResource btnCalc}" Clicked="OnSelectedNumber"/>
-                <Button Text="6" Grid.Row="2" Grid.Column="2" Style="{StaticResource btnCalc}" Clicked="OnSelectedNumber"/>
+                <Button Text="4" Grid.Row="2" Grid.Column="0" Style="{StaticResource btnCalc}" Clicked="OnElementClick"/>
+                <Button Text="5" Grid.Row="2" Grid.Column="1" Style="{StaticResource btnCalc}" Clicked="OnElementClick"/>
+                <Button Text="6" Grid.Row="2" Grid.Column="2" Style="{StaticResource btnCalc}" Clicked="OnElementClick"/>
 
-                <Button Text="1" Grid.Row="3" Grid.Column="0" Style="{StaticResource btnCalc}" Clicked="OnSelectedNumber"/>
-                <Button Text="2" Grid.Row="3" Grid.Column="1" Style="{StaticResource btnCalc}" Clicked="OnSelectedNumber"/>
-                <Button Text="3" Grid.Row="3" Grid.Column="2" Style="{StaticResource btnCalc}" Clicked="OnSelectedNumber"/>
+                <Button Text="1" Grid.Row="3" Grid.Column="0" Style="{StaticResource btnCalc}" Clicked="OnElementClick"/>
+                <Button Text="2" Grid.Row="3" Grid.Column="1" Style="{StaticResource btnCalc}" Clicked="OnElementClick"/>
+                <Button Text="3" Grid.Row="3" Grid.Column="2" Style="{StaticResource btnCalc}" Clicked="OnElementClick"/>
                 <Button Text="=" Grid.Row="3" Grid.Column="3" Grid.RowSpan="2" Style="{StaticResource btnCalc}" Clicked="OnCalculate"/>
 
-                <Button Text="0" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource btnCalc}" Clicked="OnSelectedNumber"/>
-                <Button Text="." Grid.Row="4" Grid.Column="2" Style="{StaticResource btnCalc}" Clicked="OnDot"/>
+                <Button Text="0" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource btnCalc}" Clicked="OnElementClick"/>
+                <Button Text="." Grid.Row="4" Grid.Column="2" Style="{StaticResource btnCalc}" Clicked="OnElementClick"/>
 
 
             </Grid>

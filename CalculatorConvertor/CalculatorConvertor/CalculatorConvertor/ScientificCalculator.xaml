@@ -12,7 +12,7 @@
                 <Setter Property="BackgroundColor" Value="Black"/>
                 <Setter Property="TextColor" Value="#1C66BD"/>
                 <Setter Property="BorderWidth" Value="0"/>
-                <Setter Property="FontSize" Value="40"/>
+                <Setter Property="FontSize" Value="35"/>
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>

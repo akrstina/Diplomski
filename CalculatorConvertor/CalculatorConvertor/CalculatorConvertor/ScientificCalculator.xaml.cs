@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CalculatorConvertor.Expressions;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -72,14 +73,11 @@ namespace CalculatorConvertor
 
         void OnCalculate(object sender, EventArgs e)
         {
-            if (currentState == 2)
-            {
-                var result = OperatorHelper.Calculate(firstNumber, secondNumber, myOperator);
-                this.lblRez.Text = result.ToString();
-                firstNumber = result;
-                currentState = -1;
-
-            }
+            string exp = lblRez.Text;
+            var infix = Convertors.Str2In(exp);
+            var postfix = Convertors.In2Post(infix);
+            double result = Convertors.CalculateExpression(postfix);
+            lblRez.Text = result.ToString();
         }
         void OnDot(object sender, EventArgs e)
         {

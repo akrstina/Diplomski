@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using CalculatorConvertor.Expressions;
 
 namespace CalculatorConvertor
 {
@@ -13,86 +13,71 @@ namespace CalculatorConvertor
     [DesignTimeVisible(false)]
     public partial class BasicCalculator : ContentPage
     {
-        int currentState = 1;
-        string myOperator;
-        double firstNumber, secondNumber;
 
         public BasicCalculator()
         {
             InitializeComponent();
-            OnClear(this, null);
+            OnClear(this, EventArgs.Empty);
         }
 
-        void OnSelectedNumber(object sender, EventArgs e)
-        {
-            Button button = (Button)sender;
-
-            string pressed = button.Text;
-
-            if(this.lblRez.Text=="0" || currentState<0)
-            {
-                this.lblRez.Text = "";
-
-                if (currentState < 0)
-                    currentState *= -1;
-            }
-
-            this.lblRez.Text += pressed;
-            double number;
-
-            if (double.TryParse(this.lblRez.Text,out number))
-            {
-                this.lblRez.Text = number.ToString("");
-                if(currentState==1)
-                {
-                    firstNumber = number;
-                }
-                else
-                {
-                    secondNumber = number;
-                }
-            }
-
-        }
-
-        void OnSelectedOperator(object sender, EventArgs e)
-        {
-            currentState = -2;
-            Button button = (Button)sender;
-            string pressed = button.Text;
-            myOperator = pressed;
-        }
+      
 
         void OnClear(object sender, EventArgs e)
         {
-            firstNumber = 0;
-            secondNumber = 0;
-            currentState = 1;
             this.lblRez.Text = "0";
         }
 
         void OnCalculate(object sender, EventArgs e)
         {
-            if (currentState==2)
+            string exp = lblRez.Text;
+            var infix = Convertors.Str2In(exp);
+            var postfix = Convertors.In2Post(infix);
+            double result = Convertors.CalculateExpression(postfix);
+            lblRez.Text = result.ToString();
+        }
+        void OnElementClick(object sender, EventArgs e)
+        {
+            string etext = ((Button)sender).Text;
+            string exp = lblRez.Text+ etext ;
+            try
             {
-                var result = OperatorHelper.Calculate(firstNumber, secondNumber, myOperator);
-                this.lblRez.Text = result.ToString();
-                firstNumber = result;
-                currentState = -1;
+                var infix = Convertors.Str2In(exp);
+
+                var infix2 = Convertors.Str2In(exp);
+                if (infix2.Last.Value is Operator || infix2.Last.Value is Parenthesis && infix2.Last.Value.Val == "(")
+                    infix2.AddLast(new Operand(0));
+                int n = 0;
+                foreach(var el in infix2)
+                {
+                    if(el is Parenthesis)
+                    {
+                        if (el.Val == "(")
+
+                            ++n;
+                        else
+                            --n;
+                    }
+                }
+                for (int i = 0; i < n; ++i)
+                    infix2.AddLast(new Parenthesis(')'));
+                var postfix = Convertors.In2Post(infix2);
+                double result = Convertors.CalculateExpression(postfix);
+
+                var sb = new StringBuilder();
+                foreach (var el in infix)
+                {
+                    sb.Append(el.Val);
+                }
+                lblRez.Text = sb.ToString();
+                if(etext==".")
+                {
+                    lblRez.Text += ".";
+                }
+            }
+            catch
+            {
 
             }
-        }
-        void OnDot(object sender, EventArgs e)
-        {
-            if (lblRez.Text == firstNumber.ToString() +".")
-                lblRez.Text = lblRez.Text;
-            else
-            lblRez.Text = firstNumber.ToString() +"."+ secondNumber.ToString();
-        }
-
-        private void BackToNavigationPage_Clicked(object sender, EventArgs e)
-        {
-            Navigation.PushAsync(new Navigation());
         }
 
     }
