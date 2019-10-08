@@ -10,9 +10,11 @@ namespace CalculatorConvertor.Expressions
 		{
 			Value = value;
 		}
-		public Operand(string value)
+		public Operand(string value, int fromBase=10)
 		{
-			Value = Convert.ToDouble(value);
-		}
+            if (fromBase == 10)
+                Value = Convert.ToDouble(value);
+            else Value = Convert.ToInt32(value, fromBase);
+        }
 	}
 }

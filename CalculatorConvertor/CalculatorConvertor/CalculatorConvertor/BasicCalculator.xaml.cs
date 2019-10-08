@@ -38,6 +38,8 @@ namespace CalculatorConvertor
         void OnElementClick(object sender, EventArgs e)
         {
             string etext = ((Button)sender).Text;
+            if (lblRez.Text == "0" && !(etext == "+" || etext == "-" || etext == "*" || etext == "/" || etext == "^"))
+                lblRez.Text = string.Empty;
             string exp = lblRez.Text+ etext ;
             try
             {

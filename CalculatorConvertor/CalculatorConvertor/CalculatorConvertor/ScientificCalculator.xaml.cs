@@ -14,60 +14,14 @@ namespace CalculatorConvertor
     public partial class ScientificCalculator : ContentPage
     {
 
-        int currentState = 1;
-        string myOperator;
-        double firstNumber, secondNumber;
-
         public ScientificCalculator()
         {
             InitializeComponent();
-            OnClear(this, null);
-        }
-
-        void OnSelectedNumber(object sender, EventArgs e)
-        {
-            Button button = (Button)sender;
-
-            string pressed = button.Text;
-
-            if (this.lblRez.Text == "0" || currentState < 0)
-            {
-                this.lblRez.Text = "";
-
-                if (currentState < 0)
-                    currentState *= -1;
-            }
-
-            this.lblRez.Text += pressed;
-            double number;
-
-            if (double.TryParse(this.lblRez.Text, out number))
-            {
-                this.lblRez.Text = number.ToString("");
-                if (currentState == 1)
-                {
-                    firstNumber = number;
-                }
-                else
-                {
-                    secondNumber = number;
-                }
-            }
-
-        }
-        void OnSelectedOperator(object sender, EventArgs e)
-        {
-            currentState = -2;
-            Button button = (Button)sender;
-            string pressed = button.Text;
-            myOperator = pressed;
+            OnClear(this, EventArgs.Empty);
         }
 
         void OnClear(object sender, EventArgs e)
         {
-            firstNumber = 0;
-            secondNumber = 0;
-            currentState = 1;
             this.lblRez.Text = "0";
         }
 
@@ -79,12 +33,55 @@ namespace CalculatorConvertor
             double result = Convertors.CalculateExpression(postfix);
             lblRez.Text = result.ToString();
         }
-        void OnDot(object sender, EventArgs e)
+        void OnElementClick(object sender, EventArgs e)
         {
-            if (lblRez.Text == firstNumber.ToString() + ".")
-                lblRez.Text = lblRez.Text;
-            else
-                lblRez.Text = firstNumber.ToString() + "." + secondNumber.ToString();
+            string etext = ((Button)sender).Text;
+            if (lblRez.Text == "0" && !(etext == "+" || etext == "-" || etext == "*" || etext == "/" || etext == "^"))
+                lblRez.Text = string.Empty;
+            string exp = lblRez.Text + etext;
+            try
+            {
+                var infix = Convertors.Str2In(exp);
+
+                var infix2 = Convertors.Str2In(exp);
+                if (infix2.Last.Value is Operator || infix2.Last.Value is Parenthesis && infix2.Last.Value.Val == "(")
+                    infix2.AddLast(new Operand(0));
+                int n = 0;
+                foreach (var el in infix2)
+                {
+                    if (el is Parenthesis)
+                    {
+                        if (el.Val == "(")
+
+                            ++n;
+                        else
+                            --n;
+                    }
+                }
+                for (int i = 0; i < n; ++i)
+                    infix2.AddLast(new Parenthesis(')'));
+                var postfix = Convertors.In2Post(infix2);
+                double result = Convertors.CalculateExpression(postfix);
+
+                var sb = new StringBuilder();
+                foreach (var el in infix)
+                {
+                    sb.Append(el.Val);
+                }
+                lblRez.Text = sb.ToString();
+                if (etext == ".")
+                {
+                    lblRez.Text += ".";
+                }
+            }
+            catch
+            {
+
+            }
+        }
+        void OnDelete(object sender, EventArgs e)
+        {
+            this.lblRez.Text = this.lblRez.Text.Remove(this.lblRez.Text.Length - 1);
         }
 
 

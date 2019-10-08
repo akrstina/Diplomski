@@ -5,7 +5,7 @@ namespace CalculatorConvertor.Expressions
 {
 	public static class Convertors
 	{
-		public static LinkedList<ArithmeticElement> Str2In(string expression)
+		public static LinkedList<ArithmeticElement> Str2In(string expression,int fromBase=10)
 		{
 			var infix = new LinkedList<ArithmeticElement>();
 
@@ -18,7 +18,7 @@ namespace CalculatorConvertor.Expressions
 				{
 					case 0: // start
 						{
-							if ('0' <= c && c <= '9')
+							if ('0' <= c && c <= '9' || 'A' <= c && c <= 'F')
 							{
 								temp = c.ToString();
 								state = 1;
@@ -44,7 +44,7 @@ namespace CalculatorConvertor.Expressions
 						} break;
 					case 1: // operand
 						{
-							if ('0' <= c && c <= '9')
+							if ('0' <= c && c <= '9' || 'A' <= c && c <= 'F')
 							{
 								temp += c;
 								state = 1;
@@ -56,7 +56,7 @@ namespace CalculatorConvertor.Expressions
 							}
 							else
 							{
-								var operand = new Operand(temp);
+								var operand = new Operand(temp,fromBase);
 								infix.AddLast(operand);
 
 								temp = c.ToString();
@@ -74,7 +74,7 @@ namespace CalculatorConvertor.Expressions
 						} break;
 					case 2: // operand after .
 						{
-							if ('0' <= c && c <= '9')
+							if ('0' <= c && c <= '9' || 'A' <= c && c <= 'F')
 							{
 								temp += c;
 								state = 2;
@@ -85,7 +85,7 @@ namespace CalculatorConvertor.Expressions
 							}
 							else
 							{
-								var operand = new Operand(temp);
+								var operand = new Operand(temp,fromBase);
 								infix.AddLast(operand);
 
 								temp = c.ToString();
@@ -106,14 +106,14 @@ namespace CalculatorConvertor.Expressions
 							// vec postoji prvi karakter operatora u tempu
 							if (char.IsLetter(temp[0]))
 							{
-								if ('0' <= c && c <= '9' || c == '.' || c == '(' || c == ')')
+								if ('0' <= c && c <= '9' || 'A' <= c && c <= 'F' || c == '.' || c == '(' || c == ')')
 								{
 									var op = new Operator(temp);
 									infix.AddLast(op);
 
 									temp = c.ToString();
 
-									if ('0' <= c && c <= '9') state = 1;
+									if ('0' <= c && c <= '9' || 'A' <= c && c <= 'F') state = 1;
 									else if (c == '.') state = 2;
 									else
 									{
@@ -137,7 +137,7 @@ namespace CalculatorConvertor.Expressions
 
 								temp = c.ToString();
 
-								if ('0' <= c && c <= '9') state = 1;
+								if ('0' <= c && c <= '9' || 'A' <= c && c <= 'F') state = 1;
 								else if (c == '.') state = 2;
 								else if (c == '(' || c == ')')
 								{
@@ -154,7 +154,7 @@ namespace CalculatorConvertor.Expressions
 
 			if (state == 1 || state == 2)
 			{
-				var operand = new Operand(temp);
+				var operand = new Operand(temp,fromBase);
 				infix.AddLast(operand);
 			}
             else if (state==3 )
@@ -243,7 +243,12 @@ namespace CalculatorConvertor.Expressions
 			switch (op)
 			{
 				case "sin": return Math.Sin(operands[0]);
-				case "+": return operands[0] + operands[1];
+                case "cos": return Math.Cos(operands[0]);
+                case "tan": return Math.Tan(operands[0]);
+                case "√": return Math.Sqrt(operands[0]);
+                case "log": return Math.Log(operands[0]);
+                case "exp": return Math.Exp(operands[0]);
+                case "+": return operands[0] + operands[1];
 				case "-": return operands[0] - operands[1];
 				case "*": return operands[0] * operands[1];
 				case "/": return operands[0] / operands[1];

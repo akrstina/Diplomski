@@ -20,7 +20,7 @@ namespace CalculatorConvertor.Expressions
 				case "+": case "-": return 2;
 				case "*": case "/": return 3;
 				case "^": return 5;
-				case "sin": return int.MaxValue - 1;
+				case "sin": case "cos": case "tan": case "exp": case "√": case "log":  return int.MaxValue - 1;
 			}
 
 			throw new Exception("Invalid operator.");
@@ -33,7 +33,7 @@ namespace CalculatorConvertor.Expressions
 				case "+": case "-": return 2;
 				case "*": case "/": return 3;
 				case "^": return 4;
-				case "sin": return int.MaxValue - 2;
+				case "sin": case "cos": case "tan": case "exp": case "√": case "log": return int.MaxValue - 2;
 			}
 
 			throw new Exception("Invalid operator.");
@@ -44,7 +44,12 @@ namespace CalculatorConvertor.Expressions
 			switch (Value)
 			{
 				case "sin":
-					return 0;
+                case "cos":
+                case "tan":
+                case "exp":
+                case "√":
+                case "log":
+                    return 0;
 				case "+": case "-":
 				case "*": case "/":
 				case "^":
